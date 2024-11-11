@@ -1,0 +1,14 @@
+# Ignore Unity specific files and folders
+Library/
+Temp/
+Obj/
+Build/
+.vs/
+.idea/
+.user
+.userprefs
+.suo
+.unityproj
+.booproj
+# MacOS system files
+.DS_Store
