@@ -68,8 +68,7 @@ public class PlayerHealth : MonoBehaviour
         // Por ejemplo, podemos desactivar al jugador temporalmente
         gameObject.SetActive(false);
 
-        // Reiniciar la escena actual
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Recarga la escena actual
+        SceneManager.LoadScene("DefeatScene");
     }
 
     public void Heal(int healAmount)
