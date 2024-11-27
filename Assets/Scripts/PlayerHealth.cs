@@ -8,6 +8,8 @@ public class PlayerHealth : MonoBehaviour
     public int maxHealth = 3; // Salud máxima del jugador
     private int currentHealth;
 
+    public HealthBar healthBar;
+
     public delegate void OnPlayerDeath();
     public event OnPlayerDeath playerDeath;
 
@@ -16,6 +18,7 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     // Método para activar el escudo
@@ -45,6 +48,9 @@ public class PlayerHealth : MonoBehaviour
         }
 
         currentHealth -= damage;
+
+        healthBar.SetHealth(currentHealth);
+
         Debug.Log("Jugador ha recibido daño. Daño: " + damage + " | Salud restante: " + currentHealth); // Debug que muestra el daño recibido y la salud restante
 
         if (currentHealth <= 0)
