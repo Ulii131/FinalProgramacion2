@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyScript : MonoBehaviour
 {
-    public int vidaInicial = 2; // La cantidad de impactos que puede resistir el enemigo
+    public int vidaInicial = 3; // La cantidad de impactos que puede resistir el enemigo
     private int vidaActual;
+    private bool isDestroyed = false; // Flag para evitar múltiples destrucciones
 
     private void Start()
     {
@@ -14,6 +16,8 @@ public class EnemyScript : MonoBehaviour
 
     public void RecibirDaño(int cantidad)
     {
+        if (isDestroyed) return; // Si ya está destruido, no hacemos nada
+
         vidaActual -= cantidad;
 
         if (vidaActual <= 0)
@@ -24,10 +28,13 @@ public class EnemyScript : MonoBehaviour
 
     private void DestruirEnemigo()
     {
-        // Llama al método del spawner para reducir el contador
-        FindObjectOfType<EnemySpawner>().EnemyDestroyed();
+        if (isDestroyed) return; // Evita que se ejecute más de una vez
+        isDestroyed = true;
 
-        // Luego, destruye el objeto enemigo
+        // Llama al método del spawner
+        EnemySpawner.Instance.EnemyDestroyed();
+
+        // Destruye el objeto enemigo
         Destroy(gameObject);
     }
 }

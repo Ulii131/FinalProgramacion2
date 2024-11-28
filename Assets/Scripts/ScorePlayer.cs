@@ -17,7 +17,7 @@ public class ScorePlayer : MonoBehaviour
     private void Update()
     {
 
-        textMesh.text = "Score: " + scores.ToString("0");
+        textMesh.text = "Puntaje: " + scores.ToString("0");
     }
 
     public void IncrementScore(float scoreIn)
