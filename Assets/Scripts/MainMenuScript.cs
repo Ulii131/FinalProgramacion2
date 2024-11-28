@@ -5,6 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour
 {
+    [SerializeField] private AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource.Play();
+    }
     public void EmpezarNivel(string NombreNivel)
     {
         SceneManager.LoadScene(NombreNivel);

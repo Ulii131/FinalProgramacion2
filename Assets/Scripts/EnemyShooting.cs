@@ -10,6 +10,9 @@ public class EnemyShooting : MonoBehaviour
     private EnemyMovement enemyMovement; // Referencia al script EnemyMovement
     private bool canShoot = false; // Flag para controlar si el enemigo puede disparar
 
+    //Para el audio
+    [SerializeField] private AudioSource shootingSound;
+
     private void Start()
     {
         // Intentamos obtener el componente EnemyMovement
@@ -36,6 +39,7 @@ public class EnemyShooting : MonoBehaviour
         {
             // Instanciamos el proyectil en el punto de disparo
             Instantiate(projectilePrefab, shootingPoint.position, shootingPoint.rotation);
+            shootingSound.Play();
         }
     }
 
