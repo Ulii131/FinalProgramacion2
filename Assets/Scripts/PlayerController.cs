@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float tiltAmount = 30.0f;
     public float smooth = 5.0f;
     public GameObject shieldVisual; // Objeto visual del escudo (asignar en el Inspector)
+    public AudioSource audioSource;
 
     private Transform visual; // Referencia al GameObject "Visual"
     private bool isShieldActive = false;
@@ -66,7 +67,8 @@ public class PlayerController : MonoBehaviour
         isShieldActive = true;
         shieldDuration = duration;
         shieldTimer = duration;
-        shieldVisual.SetActive(true); // Activa el objeto visual del escudo
+        shieldVisual.SetActive(true);// Activa el objeto visual del escudo
+        audioSource.Play();
         Debug.Log("Escudo activado"); // Registro en la consola
     }
 

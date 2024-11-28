@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class EnemySpawner : MonoBehaviour
     public float spawnInterval = 3.0f;
     public int maxEnemies = 15; // Límite máximo de enemigos
     private int currentEnemies = 0; // Número actual de enemigos
+    private int enemigosDestruidos = 0; // Contador global de enemigos destruidos
+    public static EnemySpawner Instance; // Singleton para acceso global
+
 
     private List<int> assignedDestinations = new List<int>();
     private EnemyFactory enemyFactory; // Instancia de EnemyFactory
@@ -84,11 +88,34 @@ public class EnemySpawner : MonoBehaviour
             }
         }
     }
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject); // Evita duplicados en la escena
+        }
+    }
 
     // Añade una función para reducir el contador de enemigos cuando un enemigo sea destruido
+
     public void EnemyDestroyed()
     {
-        currentEnemies--;
-        Debug.Log("Enemigo destruido. Enemigos restantes: " + currentEnemies);
+        currentEnemies--; // Reduce el contador de enemigos activos en la escena
+        enemigosDestruidos++; // Incrementa el contador de enemigos destruidos
+
+        // Muestra en la consola cuántos enemigos han sido destruidos
+        Debug.Log("Enemigo destruido. Enemigos restantes: " + currentEnemies + ". Total destruidos: " + enemigosDestruidos);
+
+        // Verifica si todos los enemigos han sido derrotados
+        if (enemigosDestruidos >= maxEnemies)
+        {
+            Debug.Log("¡Todos los enemigos han sido derrotados! Cargando escena de victoria...");
+            SceneManager.LoadScene("VictoryScene"); // Cambia a la escena de victoria
+        }
     }
+
 }

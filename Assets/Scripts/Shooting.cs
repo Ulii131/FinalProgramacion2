@@ -12,6 +12,11 @@ public class Shooting : MonoBehaviour
     private float lastShootTime;
     private Vector3 shootingDirection;
 
+    //Para el audio
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip audioClip;
+
+
     private void Update()
     {
         // Almacena la dirección de disparo
@@ -20,6 +25,8 @@ public class Shooting : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && Time.time - lastShootTime >= shootInterval)
         {
             Shoot();
+            audioSource.clip = audioClip;
+            audioSource.Play();
         }
     }
 

@@ -20,6 +20,10 @@ public class SuperShooting : MonoBehaviour
 
     private Text cooldownText;
 
+    //Para el audio
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip audioClip;
+
     private void Start()
     {
         cooldownText = GameObject.Find("CooldownText").GetComponent<Text>();
@@ -48,6 +52,8 @@ public class SuperShooting : MonoBehaviour
                 if (isCharging)
                 {
                     StartCoroutine(ShootMultipleSuperShots());
+                    audioSource.clip = audioClip;
+                    audioSource.Play();
                     StartCooldown();
                 }
                 StopCharging();
